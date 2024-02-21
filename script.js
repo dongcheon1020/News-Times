@@ -2,9 +2,9 @@ const APT_KEY = "3458d4bb705d428295269fe64ff576b0";
 let newsList = [];
 const getLatestNews = async () => {
   const url = new URL(
-    `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines`
+    // `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines`
+    `https://tiny-melba-6e7595.netlify.app/top-headlines?country=kr`
   );
-  // `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${APT_KEY}`
   // https://tiny-melba-6e7595.netlify.app
   const response = await fetch(url);
   const data = await response.json();
