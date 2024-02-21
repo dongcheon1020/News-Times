@@ -2,9 +2,10 @@ const APT_KEY = "3458d4bb705d428295269fe64ff576b0";
 let newsList = [];
 const getLatestNews = async () => {
   const url = new URL(
-    // `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${APT_KEY}`
     `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines`
   );
+  // `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${APT_KEY}`
+  // https://tiny-melba-6e7595.netlify.app
   const response = await fetch(url);
   const data = await response.json();
 
@@ -13,7 +14,6 @@ const getLatestNews = async () => {
 
   console.log("ddd", newsList);
 };
-
 const render = () => {
   const newsHTML = newsList
     .map(
@@ -40,10 +40,10 @@ const render = () => {
                   : news.description
               }
             </p>
-            <div>${news.source.name || "no source"} * ${moment(
-        news.publishedAt
+            <div>${news.rights || "no source"}  ${moment(
+        news.published_date
       ).fromNow()}</div>
-          </div>
+        </div>
         </div>`
     )
     .join("");
