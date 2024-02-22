@@ -17,9 +17,18 @@
   </head>
   <body>
     <section class="container">
-      <div>
-        <input id="search-input" type="text" />
-        <button onclick="getNewsByKeyword()">검색</button>
+      <div class="header">
+        <img class="m-bt m-menu" src="list.bullet 1.svg" alt="menu" />
+        <img
+          onclick="openSearchBox()"
+          class="m-bt search-icon"
+          src="Group.svg"
+          alt=""
+        />
+        <span class="input-area">
+          <input id="search-input" type="text" />
+          <button onclick="getNewsByKeyword()">검색</button>
+        </span>
       </div>
       <section>
         <div class="head-line">
@@ -30,17 +39,19 @@
           </svg>
         </div>
         <div class="menus">
-          <button>Business</button>
-          <button>Entertainment</button>
-          <button>General</button>
-          <button>Health</button>
-          <button>Science</button>
-          <button>Sports</button>
-          <button>Technology</button>
+          <button class="close"><img src="x.svg" alt="menu close" /></button>
+          <button class="menu-item-bt">Business</button>
+          <button class="menu-item-bt">Entertainment</button>
+          <button class="menu-item-bt">General</button>
+          <button class="menu-item-bt">Health</button>
+          <button class="menu-item-bt">Science</button>
+          <button class="menu-item-bt">Sports</button>
+          <button class="menu-item-bt">Technology</button>
         </div>
       </section>
       <section id="news-board"></section>
     </section>
+    <div class="background"></div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

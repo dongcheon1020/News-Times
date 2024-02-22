@@ -17,13 +17,15 @@
   flex-wrap: wrap;
   border-top: 1px solid #ebebeb;
   border-bottom: 4px double #000;
+  position: relative;
+  transition: left 0.3s ease;
 }
-.menus button {
+.menu-item-bt {
   background: none;
   border: none;
   margin: 5px;
 }
-.menus button:hover {
+.menu-item-bt:hover {
   background-color: beige;
 }
 .news-img-size {
@@ -32,4 +34,71 @@
 }
 .news {
   border-bottom: 2px solid #000;
+}
+.m-menu {
+  display: none;
+}
+.header {
+  display: flex;
+  padding: 10px 0;
+  gap: 16px;
+  align-items: center;
+}
+.m-bt {
+  width: 23px;
+}
+.close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+.background {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  opacity: 0.4;
+  z-index: 1;
+}
+.input-area {
+  display: none;
+}
+@media screen and (max-width: 992px) {
+  body {
+  }
+  .menus {
+    position: fixed;
+    top: 0;
+    left: -60%;
+    width: 60%;
+    height: 100%;
+    background-color: #fff;
+    margin: 0;
+    z-index: 2;
+    box-shadow: 2px 0px 12px 3px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 100px;
+  }
+  .menu-item-bt {
+    padding: 18px;
+    margin: 0;
+  }
+  .head-line {
+    margin-bottom: 1em;
+  }
+  .m-menu {
+    display: block;
+  }
+  .close {
+    display: block;
+  }
 }
