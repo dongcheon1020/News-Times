@@ -1,9 +1,14 @@
 const APT_KEY = "3458d4bb705d428295269fe64ff576b0";
 let newsList = [];
+const menus = document.querySelectorAll(".menus button");
+menus.forEach((menu) =>
+  menu.addEventListener("click", (event) => getNewsByCategory(event))
+);
+
 const getLatestNews = async () => {
   const url = new URL(
-    // `http://times-node-env.eba-appvq3ef.ap-northeast-2.elasticbeanstalk.com/top-headlines`
-    `https://tiny-melba-6e7595.netlify.app/top-headlines?country=kr`
+    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${APT_KEY}`
+    // `https://tiny-melba-6e7595.netlify.app/top-headlines?country=kr`
   );
   // https://tiny-melba-6e7595.netlify.app
   const response = await fetch(url);
@@ -14,6 +19,32 @@ const getLatestNews = async () => {
 
   console.log("ddd", newsList);
 };
+
+const getNewsByCategory = async (event) => {
+  const catefory = event.target.textContent.toLowerCase();
+  console.log(catefory);
+  const url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=us&category=${catefory}&apiKey=${APT_KEY}`
+  );
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log("ddddd", data);
+  newsList = data.articles;
+  render();
+};
+
+const getNewsByKeyword = async () => {
+  const keyword = document.getElementById("search-input").value;
+  const url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${APT_KEY}`
+  );
+  const response = await fetch(url);
+  const data = await response.json();
+  newsList = data.articles;
+  render();
+  console.log("sdfsafsdafssdfsadf", data);
+};
+
 const render = () => {
   const newsHTML = newsList
     .map(

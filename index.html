@@ -17,6 +17,10 @@
   </head>
   <body>
     <section class="container">
+      <div>
+        <input id="search-input" type="text" />
+        <button onclick="getNewsByKeyword()">검색</button>
+      </div>
       <section>
         <div class="head-line">
           <svg viewBox="0 0 184 25" fill="#000" aria-hidden="true">
@@ -26,21 +30,13 @@
           </svg>
         </div>
         <div class="menus">
-          <button>Sport</button>
-          <button>Tech</button>
-          <button>World</button>
-          <button>Finalce</button>
-          <button>Politics</button>
           <button>Business</button>
-          <button>Economics</button>
           <button>Entertainment</button>
-          <button>Beauty</button>
-          <button>Travel</button>
-          <button>Music</button>
-          <button>Food</button>
+          <button>General</button>
+          <button>Health</button>
           <button>Science</button>
-          <button>Gaming</button>
-          <button>Energy</button>
+          <button>Sports</button>
+          <button>Technology</button>
         </div>
       </section>
       <section id="news-board"></section>
@@ -54,12 +50,3 @@
     <script src="script.js"></script>
   </body>
 </html>
-<div class="row news">
-  <div class="col-lg-4"></div>
-  <div class="col-lg-8">
-    <div>
-      ${news.rights || "no source"} ${moment( news.published_date ).fromNow()}
-    </div>
-  </div>
-  `
-</div>
