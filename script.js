@@ -24,7 +24,8 @@ const getNewsByCategory = async (event) => {
   const catefory = event.target.textContent.toLowerCase();
   console.log(catefory);
   const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=us&category=${catefory}&apiKey=${APT_KEY}`
+    // `https://newsapi.org/v2/top-headlines?country=us&category=${catefory}&apiKey=${APT_KEY}`
+    `https://tiny-melba-6e7595.netlify.app/top-headlines?category=${catefory}&country=kr`
   );
   const response = await fetch(url);
   const data = await response.json();
@@ -36,7 +37,8 @@ const getNewsByCategory = async (event) => {
 const getNewsByKeyword = async () => {
   const keyword = document.getElementById("search-input").value;
   const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${APT_KEY}`
+    // `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${APT_KEY}`
+    `https://tiny-melba-6e7595.netlify.app/top-headlines?q=${keyword}&country=kr`
   );
   const response = await fetch(url);
   const data = await response.json();
