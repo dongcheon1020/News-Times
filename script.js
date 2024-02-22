@@ -7,8 +7,8 @@ menus.forEach((menu) =>
 
 const getLatestNews = async () => {
   const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${APT_KEY}`
-    // `https://tiny-melba-6e7595.netlify.app/top-headlines?country=kr`
+    // `https://newsapi.org/v2/top-headlines?country=us&apiKey=${APT_KEY}`
+    `https://tiny-melba-6e7595.netlify.app/top-headlines?country=kr`
   );
   // https://tiny-melba-6e7595.netlify.app
   const response = await fetch(url);
