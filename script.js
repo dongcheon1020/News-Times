@@ -4,47 +4,55 @@ const menus = document.querySelectorAll(".menu-item-bt");
 menus.forEach((menu) =>
   menu.addEventListener("click", (event) => getNewsByCategory(event))
 );
+let url = new URL(
+  `https://newsapi.org/v2/top-headlines?country=us&apiKey=${APT_KEY}`
+);
+
+const getNews = async () => {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    if (response.status === 200) {
+      if (data.articles.length === 0) {
+        throw new Error("No result for this search");
+      }
+      newsList = data.articles;
+      render();
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (e) {
+    console.log(e.message);
+    errorRender(e.message);
+  }
+};
 
 const getLatestNews = async () => {
-  const url = new URL(
-    // `https://newsapi.org/v2/top-headlines?country=us&apiKey=${APT_KEY}`
-    `https://tiny-melba-6e7595.netlify.app/top-headlines?country=kr`
+  url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${APT_KEY}`
+    // `https://tiny-melba-6e7595.netlify.app/top-headlines?country=kr`
   );
-  // https://tiny-melba-6e7595.netlify.app
-  const response = await fetch(url);
-  const data = await response.json();
-
-  newsList = data.articles;
-  render();
-
-  console.log("ddd", newsList);
+  getNews();
 };
 
 const getNewsByCategory = async (event) => {
   const catefory = event.target.textContent.toLowerCase();
-  console.log(catefory);
-  const url = new URL(
-    // `https://newsapi.org/v2/top-headlines?country=us&category=${catefory}&apiKey=${APT_KEY}`
-    `https://tiny-melba-6e7595.netlify.app/top-headlines?category=${catefory}&country=kr`
+
+  url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=us&category=${catefory}&apiKey=${APT_KEY}`
+    // `https://tiny-melba-6e7595.netlify.app/top-headlines?category=${catefory}&country=kr`
   );
-  const response = await fetch(url);
-  const data = await response.json();
-  console.log("ddddd", data);
-  newsList = data.articles;
-  render();
+  getNews();
 };
 
 const getNewsByKeyword = async () => {
   const keyword = document.getElementById("search-input").value;
-  const url = new URL(
-    // `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${APT_KEY}`
-    `https://tiny-melba-6e7595.netlify.app/top-headlines?q=${keyword}&country=kr`
+
+  url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${APT_KEY}`
+    // `https://tiny-melba-6e7595.netlify.app/top-headlines?q=${keyword}&country=kr`
   );
-  const response = await fetch(url);
-  const data = await response.json();
-  newsList = data.articles;
-  render();
-  console.log("sdfsafsdafssdfsadf", data);
+  getNews();
 };
 
 const render = () => {
@@ -83,6 +91,16 @@ const render = () => {
 
   document.getElementById("news-board").innerHTML = newsHTML;
 };
+
+const errorRender = (em) => {
+  const errorHTML = `
+    <div class="alert alert-danger" role="alert">
+  ${em}
+</div>
+`;
+  document.getElementById("news-board").innerHTML = errorHTML;
+};
+
 getLatestNews();
 
 // menu
