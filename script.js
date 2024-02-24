@@ -38,6 +38,7 @@ const getNews = async () => {
 };
 
 const getLatestNews = async () => {
+  page = 1;
   url = new URL(
     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${APT_KEY}`
     // `https://tiny-melba-6e7595.netlify.app/top-headlines?country=kr`
@@ -46,6 +47,7 @@ const getLatestNews = async () => {
 };
 
 const getNewsByCategory = async (event) => {
+  page = 1;
   const catefory = event.target.textContent.toLowerCase();
 
   url = new URL(
@@ -56,6 +58,7 @@ const getNewsByCategory = async (event) => {
 };
 
 const getNewsByKeyword = async () => {
+  page = 1;
   const keyword = document.getElementById("search-input").value;
 
   url = new URL(
@@ -132,7 +135,7 @@ const paginationRender = () => {
   <li class="page-item ${
     page <= firstPage ? "disabled" : " "
   } " onclick="moveToPage(${
-    page - 1
+    page <= firstPage ? page : page - 1
   })"><a class="page-link" href="#">&lt;</a></li>
 
 
@@ -142,14 +145,15 @@ const paginationRender = () => {
     paginationHTML += `          
     <li class="page-item ${
       i === page ? "active" : ""
-    }" onclick="moveToPage(${i})" ><a class="page-link">${i}</a></li>
+    }" onclick="moveToPage(${i})" ><a class="page-link" href="#">${i}</a></li>
   `;
   }
+
   paginationHTML += `
   <li class="page-item ${
     page >= lastPage ? "disabled" : " "
   } " onclick="moveToPage(${
-    page + 1
+    page >= lastPage ? page : page + 1
   })"><a class="page-link" href="#">&gt;</a></li>
   <li class="page-item ${
     page >= lastPage ? "disabled" : " "
@@ -159,7 +163,6 @@ const paginationRender = () => {
 };
 
 const moveToPage = (pageNum) => {
-  console.log(pageNum);
   page = pageNum;
   getNews();
 };
