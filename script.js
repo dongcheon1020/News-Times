@@ -31,7 +31,6 @@ const getNews = async () => {
     } else {
       throw new Error(data.message);
     }
-    console.log(data);
   } catch (e) {
     errorRender(e.message);
   }
@@ -62,8 +61,8 @@ const getNewsByKeyword = async () => {
   const keyword = document.getElementById("search-input").value;
 
   url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${APT_KEY}`
-    // `https://tiny-melba-6e7595.netlify.app/top-headlines?q=${keyword}&country=kr`
+    // `https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${APT_KEY}`
+    `https://tiny-melba-6e7595.netlify.app/top-headlines?q=${keyword}&country=kr`
   );
   getNews();
 };
@@ -109,8 +108,11 @@ const render = () => {
 
 const errorRender = (em) => {
   const errorHTML = `
-    <div class="alert alert-danger" role="alert">
-  ${em}
+  
+    <div class=" alert-danger" role="alert">
+    <img class="errorimg" src="exclamationmark.triangle.fill 1.svg" alt="error" />
+<span class="errormessage">${em}</span>
+  
 </div>
 `;
   document.getElementById("news-board").innerHTML = errorHTML;
@@ -174,30 +176,40 @@ const moveToPage = (pageNum) => {
 
 getLatestNews();
 
-// menu
-const menu = document.querySelector(".menus");
-const menuClose = document.querySelector(".close");
-const openMenu = document.querySelector(".m-bt");
-const backgorundLayout = document.querySelector(".background");
-
-openMenu.addEventListener("click", () => {
-  menu.style = "left:0";
-  backgorundLayout.style = "display:block";
-});
-menuClose.addEventListener("click", () => {
-  menu.style = "left:-60%";
-  backgorundLayout.style = "display:none";
-});
-
-window.addEventListener("resize", () => {
-  let screenWidth = window.innerWidth;
-  if (screenWidth > 992) {
-    menu.style = "translateX(0%)";
-    backgorundLayout.style = "display:none";
-  } else {
-    menu.style = "translateX(-60%)";
+const textInput = document.getElementById("search-input");
+textInput.addEventListener("keypress", (e) => {
+  if (e.key == "Enter") {
+    getNewsByKeyword();
   }
 });
+textInput.addEventListener("click", () => {
+  textInput.value = "";
+});
+
+// menu
+// const menu = document.querySelector(".menus");
+// const menuClose = document.querySelector(".close");
+// const openMenu = document.querySelector(".m-bt");
+// const backgorundLayout = document.querySelector(".background");
+
+// openMenu.addEventListener("click", () => {
+//   menu.style = "left:0";
+//   backgorundLayout.style = "display:block";
+// });
+// menuClose.addEventListener("click", () => {
+//   menu.style = "left:-60%";
+//   backgorundLayout.style = "display:none";
+// });
+
+// window.addEventListener("resize", () => {
+//   let screenWidth = window.innerWidth;
+//   if (screenWidth > 992) {
+//     menu.style = "translateX(0%)";
+//     backgorundLayout.style = "display:none";
+//   } else {
+//     menu.style = "translateX(-60%)";
+//   }
+// });
 
 // search
 let inputArea = document.querySelector(".input-area");
