@@ -1,49 +1,161 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
-.head-line {
-  margin-top: 1em;
+
+.wrapper {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  background-color: #fff;
+  box-shadow: 0 2px 0px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 999;
+  position: sticky;
+  top: calc(-25px - 15px);
+}
+.header-center {
+  padding-bottom: 15px;
+  box-sizing: border-box;
+  max-width: 980px;
+  margin: auto;
+}
+
+.logo-search-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  padding-top: 25px;
+  z-index: 99;
+}
+.logo {
+  color: #007aff;
+  font-size: 32px;
+  font-weight: normal;
+}
+.input-area {
+  width: 100%;
+  height: 52px;
+  border: 3px solid #007aff;
+  border-radius: 26px;
+  background-color: #fff;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+#search-input {
+  width: 100%;
+  height: 100%;
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 18px;
+  margin-left: 26px;
+  box-sizing: border-box;
+  color: #1d1d1f;
+}
+.input-bt {
+  background: none;
+  border: none;
+  margin-left: 10px;
+  margin-right: 16px;
   display: grid;
   place-items: center;
 }
-.head-line svg {
-  width: 430px;
-}
+
 .menus {
-  margin-top: 1em;
+  width: 100%;
+  box-sizing: border-box;
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  border-top: 1px solid #ebebeb;
-  border-bottom: 4px double #000;
-  position: relative;
-  transition: left 0.3s ease;
+  justify-content: space-between;
+  margin-top: 14px;
 }
 .menu-item-bt {
   background: none;
   border: none;
-  margin: 5px;
+  font-size: 16px;
+  color: #6e6e73;
+  position: relative;
+  width: 100%;
+}
+.menu-item-bt:nth-child(n + 3)::before {
+  content: " ";
+  background-color: #d2d2d2;
+  width: 2px;
+  height: 16px;
+  position: absolute;
+  inset: 0;
+  right: auto;
+  margin: auto;
+  font-weight: normal;
+}
+.menu-item-bt.active {
+  color: #1d1d1f;
 }
 .menu-item-bt:hover {
-  background-color: beige;
+  text-decoration: underline;
 }
-.news-img-size {
-  max-width: 100%;
-  min-height: 250px;
+
+main {
+  width: 100vw;
+  background-color: #f5f5f7;
+  padding-top: 10px;
+}
+#news-board {
+  max-width: 980px;
+  margin: auto;
 }
 .news {
-  border-bottom: 2px solid #000;
-}
-.m-menu {
-  display: none;
-}
-.header {
+  width: 100%;
+  /* height: ; */
+  padding: 10px;
+  background-color: #fff;
   display: flex;
-  padding: 10px 0;
-  gap: 16px;
-  align-items: center;
+  margin-bottom: 10px;
 }
+.news-img {
+  width: 379px;
+  display: grid;
+  place-items: center;
+}
+.news-img img {
+  width: 379px;
+}
+.news-captions {
+  margin-left: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative;
+}
+.news-title {
+  font-size: 24px;
+  margin-bottom: 14px;
+}
+.news-description {
+  font-size: 18px;
+  color: #6e6e73;
+  line-height: 25px;
+  margin-bottom: 20px;
+}
+.rights-date {
+  font-size: 14px;
+  color: #6e6e73;
+  position: absolute;
+  left: 10x;
+  bottom: 10px;
+}
+/* .m-menu {
+  display: none;
+} */
+
 .m-bt {
   width: 23px;
 }
@@ -67,9 +179,58 @@
   opacity: 0.4;
   z-index: 1;
 }
-.input-area {
-  display: none;
+.pagination {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+  width: fit-content;
+  height: 40px;
+  margin-bottom: 20px;
+  list-style-type: none;
+  padding: 0 25px;
+  border-radius: 5px;
 }
+
+.page-item {
+  border-radius: 3px;
+
+  width: 23px;
+  height: 23px;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+  color: #999;
+  transition: background-color 0.3s ease;
+}
+.page-item:hover {
+  background-color: #ededed;
+}
+.page-item.active {
+  color: #fff;
+  background-color: #007aff;
+}
+.page-item.disabled {
+  opacity: 0.2;
+}
+.page-link {
+  text-decoration: inherit;
+  color: inherit;
+  display: grid;
+  place-items: center;
+  line-height: 23px;
+}
+.pagination-items {
+  display: flex;
+  gap: 5px;
+  margin: 0 16px;
+}
+/* .pagination-items > li {
+  width: 100px;
+  height: 100px;
+  background-color: black;
+} */
 @media screen and (max-width: 992px) {
   body {
   }
@@ -92,9 +253,9 @@
     padding: 18px;
     margin: 0;
   }
-  .head-line {
+  /* .head-line {
     margin-bottom: 1em;
-  }
+  } */
   .m-menu {
     display: block;
   }

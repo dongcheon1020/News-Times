@@ -31,8 +31,8 @@ const getNews = async () => {
     } else {
       throw new Error(data.message);
     }
+    console.log(data);
   } catch (e) {
-    console.log(e.message);
     errorRender(e.message);
   }
 };
@@ -72,33 +72,35 @@ const render = () => {
   const newsHTML = newsList
     .map(
       (news) => `
-         <div class="row news">
-          <div class="col-lg-4">
-            <img
-              class="news-img-size"
-              src="${
-                news.urlToImage ||
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqEWgS0uxxEYJ0PsOb2OgwyWvC0Gjp8NUdPw&usqp=CAU"
-              }"
-              alt=""
-            />
-          </div>
-          <div class="col-lg-8">
-            <h2>${news.title}</h2>
-            <p>
-              ${
-                news.description == null || news.description == ""
-                  ? "내용없음"
-                  : news.description.length > 200
-                  ? news.description.substring(0, 200) + "..."
-                  : news.description
-              }
-            </p>
-            <div>${news.rights || "no source"}  ${moment(
-        news.published_date
-      ).fromNow()}</div>
-        </div>
-        </div>`
+
+      <article class="news">
+      <div class="news-img">
+        <img
+          src="${
+            news.urlToImage ||
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqEWgS0uxxEYJ0PsOb2OgwyWvC0Gjp8NUdPw&usqp=CAU"
+          }"
+          alt=""
+        />
+      </div>
+      <section class="news-captions">
+        <h2 class="news-title">
+        ${news.title}
+        </h2>
+        <p class="news-description">
+        ${
+          news.description == null || news.description == ""
+            ? "내용없음.."
+            : news.description.length > 100
+            ? news.description.substring(0, 100) + "..."
+            : news.description
+        }
+        </p>
+        <cite class="rights-date">${news.author || "no source"} - ${moment(
+        news.publishedAt
+      ).fromNow()}</cite>
+      </section>
+    </article>`
     )
     .join("");
 
@@ -123,12 +125,10 @@ const paginationRender = () => {
   if (lastPage > totalPages) {
     lastPage = totalPages;
   }
-  console.log(totalPages);
   // firstPage
   const firstPage =
     lastPage - (groupSize - 1) <= 0 ? 1 : lastPage - (groupSize - 1);
-  let paginationHTML = `
-
+  let paginationHTML = `  
   <li class="page-item ${
     page <= firstPage ? "disabled" : " "
   } " onclick="moveToPage(${firstPage})"><a class="page-link" href="#">&lt&lt;</a></li>
@@ -137,16 +137,19 @@ const paginationRender = () => {
   } " onclick="moveToPage(${
     page <= firstPage ? page : page - 1
   })"><a class="page-link" href="#">&lt;</a></li>
-
-
+    <li class="page-items">
+      <ul class="pagination-items">
+      </ul>
+    </li>
   `;
 
+  let paginationItemsHTML = ``;
   for (let i = firstPage; i <= lastPage; i++) {
-    paginationHTML += `          
+    paginationItemsHTML += `
     <li class="page-item ${
       i === page ? "active" : ""
     }" onclick="moveToPage(${i})" ><a class="page-link" href="#">${i}</a></li>
-  `;
+    `;
   }
 
   paginationHTML += `
@@ -159,7 +162,9 @@ const paginationRender = () => {
     page >= lastPage ? "disabled" : " "
   } " onclick="moveToPage(${lastPage})"><a class="page-link" href="#">&gt&gt;</a></li>
   `;
+
   document.querySelector(".pagination").innerHTML = paginationHTML;
+  document.querySelector(".pagination-items").innerHTML = paginationItemsHTML;
 };
 
 const moveToPage = (pageNum) => {
@@ -197,10 +202,10 @@ window.addEventListener("resize", () => {
 // search
 let inputArea = document.querySelector(".input-area");
 
-const openSearchBox = () => {
-  if (inputArea.style.display === "inline") {
-    inputArea.style.display = "none";
-  } else {
-    inputArea.style.display = "inline";
-  }
-};
+// const openSearchBox = () => {
+//   if (inputArea.style.display === "inline") {
+//     inputArea.style.display = "none";
+//   } else {
+//     inputArea.style.display = "inline";
+//   }
+// };
