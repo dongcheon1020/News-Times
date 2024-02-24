@@ -351,6 +351,7 @@ main {
   #search-input {
     width: 100%;
     box-sizing: border-box;
+    margin-left: 15px;
   }
   .input-bt img {
     width: 20px;
