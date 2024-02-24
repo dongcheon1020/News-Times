@@ -187,10 +187,21 @@ textInput.addEventListener("click", () => {
 });
 
 // menu
-// const menu = document.querySelector(".menus");
-// const menuClose = document.querySelector(".close");
-// const openMenu = document.querySelector(".m-bt");
-// const backgorundLayout = document.querySelector(".background");
+const menu = document.querySelector(".menus");
+const menuClose = document.querySelector(".close");
+const openMenu = document.querySelector(".m-bt");
+const backgorundLayout = document.querySelector(".background");
+
+menus.forEach((e) => {
+  e.addEventListener("click", () => {
+    e.classList.add("active");
+    menus.forEach((i) => {
+      if (i !== e) {
+        i.classList.remove("active");
+      }
+    });
+  });
+});
 
 // openMenu.addEventListener("click", () => {
 //   menu.style = "left:0";

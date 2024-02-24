@@ -247,7 +247,7 @@ main {
   margin-top: 30px;
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 980px) {
   body {
   }
   .menus {
