@@ -1,6 +1,11 @@
 const APT_KEY = "3458d4bb705d428295269fe64ff576b0";
 let newsList = [];
 const menus = document.querySelectorAll(".menu-item-bt");
+let searchBtOn = false;
+let inputArea = document.querySelector(".input-area");
+let searchMDome = document.querySelector(".search-m");
+let logo = document.querySelector(".logo");
+
 menus.forEach((menu) =>
   menu.addEventListener("click", (event) => getNewsByCategory(event))
 );
@@ -65,6 +70,7 @@ const getNewsByKeyword = async () => {
     `https://tiny-melba-6e7595.netlify.app/top-headlines?q=${keyword}&country=kr`
   );
   getNews();
+  searchMBt();
 };
 
 const render = () => {
@@ -223,16 +229,30 @@ window.addEventListener("resize", () => {
   if (screenWidth > 980) {
     menu.style = "display:flex";
     menu.style = "background-color:#fff";
+    logo.style = "display:block";
+    inputArea.style = "display:flex";
+    searchMDome.style = "display:none";
+  } else if (screenWidth < 980) {
+    menu.style = "display:none";
+    inputArea.style = "display:none";
+    searchMDome.style = "display:block";
   }
 });
 
 // search
-let inputArea = document.querySelector(".input-area");
 
-// const openSearchBox = () => {
-//   if (inputArea.style.display === "inline") {
-//     inputArea.style.display = "none";
-//   } else {
-//     inputArea.style.display = "inline";
-//   }
-// };
+const searchMBt = () => {
+  let screenWidth = window.innerWidth;
+  if (screenWidth < 980) {
+    searchBtOn = !searchBtOn;
+    if (searchBtOn === true) {
+      searchMDome.style = "display:none";
+      inputArea.style.display = "flex";
+      logo.style = "display:none";
+    } else {
+      searchMDome.style = "display:block";
+      inputArea.style.display = "none";
+      logo.style = "display:block";
+    }
+  }
+};

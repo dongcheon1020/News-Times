@@ -20,13 +20,12 @@
             <h1 class="logo">News</h1>
             <!-- 검색창 -->
             <button class="search-m">
-              <img src="Group.svg" alt="" />
+              <img onclick="searchMBt()" src="Group.svg" alt="search-bt" />
             </button>
             <span class="input-area">
               <input id="search-input" type="text" />
               <button class="input-bt" onclick="getNewsByKeyword()">
                 <img
-                  onclick="openSearchBox()"
                   class="m-bt search-icon"
                   src="searchbt.svg"
                   alt="search-button"
