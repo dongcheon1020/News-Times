@@ -203,24 +203,28 @@ menus.forEach((e) => {
   });
 });
 
-// openMenu.addEventListener("click", () => {
-//   menu.style = "left:0";
-//   backgorundLayout.style = "display:block";
-// });
-// menuClose.addEventListener("click", () => {
-//   menu.style = "left:-60%";
-//   backgorundLayout.style = "display:none";
-// });
+openMenu.addEventListener("click", () => {
+  menu.style = "display:block";
+});
+menuClose.addEventListener("click", () => {
+  menu.style = "display:none";
+});
+menus.forEach((e) => {
+  e.addEventListener("click", () => {
+    let screenWidth = window.innerWidth;
+    if (screenWidth < 980) {
+      menu.style = "display:none";
+    }
+  });
+});
 
-// window.addEventListener("resize", () => {
-//   let screenWidth = window.innerWidth;
-//   if (screenWidth > 992) {
-//     menu.style = "translateX(0%)";
-//     backgorundLayout.style = "display:none";
-//   } else {
-//     menu.style = "translateX(-60%)";
-//   }
-// });
+window.addEventListener("resize", () => {
+  let screenWidth = window.innerWidth;
+  if (screenWidth > 980) {
+    menu.style = "display:flex";
+    menu.style = "background-color:#fff";
+  }
+});
 
 // search
 let inputArea = document.querySelector(".input-area");
